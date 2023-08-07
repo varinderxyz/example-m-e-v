@@ -30,7 +30,7 @@ const start = async () => {
     const maxBaseFeeInFutureBlock =
         FlashbotsBundleProvider.getMaxBaseFeeInFutureBlock(block.baseFeePerGas, 6) 
 
-    console.log('maxBaseFeeInFutureBlock', String(maxBaseFeeInFutureBlock), String(maxBaseFeeInFutureBlock.div('100000000000000000')))
+    //console.log('maxBaseFeeInFutureBlock', String(maxBaseFeeInFutureBlock), String(maxBaseFeeInFutureBlock.div('100000000000000000')))
 
     const amountInEther = '0.001'
     const signedTransactions = await flashbotsProvider.signBundle([
@@ -59,16 +59,16 @@ const start = async () => {
         },
     ])
 
-    console.log(new Date())
-    console.log('run the simulation...')
+    //console.log(new Date())
+    //console.log('run the simulation...')
     const simulation = await flashbotsProvider.simulate(
         signedTransactions,
         blockNumber + 1,
     )
-    console.log(new Date())
+    //console.log(new Date())
 
     if (simulation.firstRevert) {
-        console.log(`Simulation Error: ${simulation.firstRevert.error}`)
+        //console.log(`Simulation Error: ${simulation.firstRevert.error}`)
     } else {
         console.log(
             `Simulation Success: ${blockNumber}}`
@@ -80,10 +80,10 @@ const start = async () => {
             signedTransactions,
             blockNumber + i
         )
-        console.log('bundle submitted, waiting', bundleSubmission.bundleHash)
+        //console.log('bundle submitted, waiting', bundleSubmission.bundleHash)
 
         const waitResponse = await bundleSubmission.wait()
-        console.log(`Wait Response: ${FlashbotsBundleResolution[waitResponse]}`)
+        //console.log(`Wait Response: ${FlashbotsBundleResolution[waitResponse]}`)
         if (
             waitResponse === FlashbotsBundleResolution.BundleIncluded ||
             waitResponse === FlashbotsBundleResolution.AccountNonceTooHigh
